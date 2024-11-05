@@ -61,6 +61,7 @@ public class UserController {
 	@GetMapping("/")
 	public ResponseEntity<List<UserDto>> getAllUsers(){
 		List<UserDto> response=userService.getAllUsers();
+		logger.info("All users fetched {}",response.toString());
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
