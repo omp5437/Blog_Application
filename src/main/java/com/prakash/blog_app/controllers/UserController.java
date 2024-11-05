@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +39,7 @@ public class UserController {
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 		 UserDto response=userService.createUser(userDto);
 		 logger.info("Create User called");
+		 logger.info(response.toString());
 		
 		return ResponseEntity.ok(response);
 	}
@@ -60,7 +61,7 @@ public class UserController {
 	@GetMapping("/")
 	public ResponseEntity<List<UserDto>> getAllUsers(){
 		List<UserDto> response=userService.getAllUsers();
-		return new ResponseEntity<List<UserDto>>(response,HttpStatus.OK);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{userId}")
@@ -68,7 +69,7 @@ public class UserController {
 		userService.deleteUser(userId);
 		ApiResponse apiResponse=new ApiResponse("User deleted Successfully", false);
 		
-		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.OK);
+		return new ResponseEntity<>(apiResponse,HttpStatus.OK);
 		
     }
 	
