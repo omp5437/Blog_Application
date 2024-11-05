@@ -1,5 +1,8 @@
 package com.prakash.blog_app.controllers;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,13 @@ import com.prakash.blog_app.services.CommentService;
 
 @RestController
 @RequestMapping("api/")
+@Slf4j
 public class CommentController {
 	
 	@Autowired
 	CommentService commentService;
+
+	Logger logger= LoggerFactory.getLogger(CommentController.class);
 	
 	@PostMapping("/user/{userId}/post/{postId}/comment")
 	public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto,
@@ -27,6 +33,8 @@ public class CommentController {
 			                                        @PathVariable int userId){
 		
 		CommentDto createdComment=commentService.createComment(commentDto,postId,userId);
+
+		logger.info(createdComment.toString());
 		
 		return new ResponseEntity<CommentDto>(createdComment, HttpStatus.CREATED);
 		
