@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @SpringBootApplication
 @Slf4j
 public class BlogAppApplication implements CommandLineRunner {
@@ -32,7 +33,6 @@ public class BlogAppApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(passEncoder.encode("xyzat"));
 		
 	}
 	
