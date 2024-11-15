@@ -20,13 +20,18 @@ import com.prakash.blog_app.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
-	@Autowired
-	UserRepository userRepository;
+
+	private UserRepository userRepository;
 	@Autowired
 	ModelMapper modelMapper;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository){
+		this.userRepository=userRepository;
+	}
 
 	@Override
 	public UserDto createUser(UserDto userdto) {
@@ -63,8 +68,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<UserDto> getAllUsers() {
-		Pageable pageable= PageRequest.of(0,2);
-		Page<User> users=userRepository.findAll(pageable);
+//		Pageable pageable= PageRequest.of(0,2);
+		List<User> users=userRepository.findAll();
 		
 		List<UserDto> userDtos=users.stream()
 				                    .map(user-> userToUserDto(user))
